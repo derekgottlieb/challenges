@@ -35,6 +35,24 @@ end
 
 
 class LinkedListTest < Minitest::Test
+  def test_find_the_first_item_in_a_linked_list
+    list = LinkedList.new()
+    assert_equal nil, first_item(list)
+
+    list = LinkedList.new
+    assert_equal nil, first_item(list)
+
+    list = LinkedList.new(Node.new("a", nil))
+    assert_equal "a", first_item(list)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+    assert_equal "a", first_item(list)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
+    assert_equal "a", first_item(list)
+  end
+
+
   def test_find_the_last_item_in_a_linked_list
     list = LinkedList.new()
     assert_equal nil, last_item(list)
@@ -52,7 +70,10 @@ class LinkedListTest < Minitest::Test
     assert_equal "c", last_item(list)
   end
 
-  # Find the largest item in a linked list  (of size 0, 1, 2, 3)
+  def test_find_the_largest_item_in_a_linked_list
+    # (of size 0, 1, 2, 3)
+  end
+
   # Find the smallest item in a linked list (of size 0, 1, 2, 3)
   # Find the length of a linked list
   # Remove an item from a linked list
