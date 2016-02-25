@@ -12,7 +12,8 @@ to also think about the data structure, which will hopefully
 reduce the jump, and allow you to understand what the structure is,
 and why it is that way.
 
-[Video](https://vimeo.com/156726608) explaining how to work through the challenges.
+* [Video](https://vimeo.com/156726608) explaining how to work through the challenges.
+* [Video](https://vimeo.com/156731425) of how to do the first challenge.
 
 
 To solve the challenges
