@@ -106,8 +106,24 @@ class LinkedListTest < Minitest::Test
     assert_equal "c", largest_item(list)
   end
 
-  # Find the smallest item in a linked list (of size 0, 1, 2, 3)
-  # Find the length of a linked list
+
+  def test_find_the_length_of_a_linked_list
+    list = LinkedList.new
+    assert_equal 0, list_size(list)
+
+    list = LinkedList.new(Node.new("a", nil))
+    assert_equal 1, list_size(list)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+    assert_equal 2, list_size(list)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
+    assert_equal 3, list_size(list)
+
+    list = LinkedList.new(Node.new("c", Node.new("b", Node.new("a", nil))))
+    assert_equal 3, list_size(list)
+  end
+
   # Remove an item from a linked list
   # Add an item to a linked list
   # Given a linked list of numbers, return a linked list of just the even numbers

@@ -30,3 +30,14 @@ def largest_item(list)
   end
   largest
 end
+
+
+def list_size(list)
+  size = 0
+  node = list.head
+  while node
+    size += 1
+    node = node.link
+  end
+  size
+end
