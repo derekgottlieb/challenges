@@ -7,12 +7,20 @@ class LinkedList
   def initialize(head=nil)
     @head = head
   end
+
+  def ==(other)
+    other.kind_of?(LinkedList) && self.head == other.head
+  end
 end
 
 class Node
   attr_accessor :data, :link
   def initialize(data, link)
     @data, @link = data, link
+  end
+
+  def ==(other)
+    other.kind_of?(Node) && self.data == other.data && self.link == other.link
   end
 end
 
@@ -257,9 +265,35 @@ class LinkedListTest < Minitest::Test
     assert_equal 'd', get_item(list, 3)
     assert_equal nil, get_item(list, 4)
     assert_equal 4, list_size(list)
+
+    assert_equal list, add_item(list, 5, "e")
+    assert_equal 'a', get_item(list, 0)
+    assert_equal 'c', get_item(list, 1)
+    assert_equal 'b', get_item(list, 2)
+    assert_equal 'd', get_item(list, 3)
+    assert_equal nil, get_item(list, 4)
+    assert_equal 'e', get_item(list, 5)
+    assert_equal nil, get_item(list, 6)
+    assert_equal 6, list_size(list)
   end
 
-  # Given a linked list of numbers, return a linked list of just the even numbers
+
+  def test_given_a_linked_list_of_numbers_return_a_linked_list_of_just_the_even_numbers
+    list = LinkedList.new
+    assert_equal LinkedList.new, select_even(list)
+
+    list = LinkedList.new(Node.new(1, nil))
+    assert_equal LinkedList.new, select_even(list)
+
+    list     = LinkedList.new(Node.new(1, Node.new(2, nil)))
+    expected = LinkedList.new(Node.new(2, nil))
+    assert_equal expected, select_even(list)
+
+    list     = LinkedList.new(Node.new(1, Node.new(2, Node.new(3, Node.new(200, nil)))))
+    expected = LinkedList.new(Node.new(2, Node.new(200, nil)))
+    assert_equal expected, select_even(list)
+  end
+
   # Given a linked list of numbers, return a linked list of just the odd numbers
   # Given a linked list of numbers, return a linked list of just the numbers that pass a block I give you
   # Given a linked list of strings, return a linked list of the strings with more than 5 chars

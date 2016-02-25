@@ -96,7 +96,13 @@ def add_item(list, index, data)
   end
 
   node = list.head
+  while node.link && 1 < index
+    node = node.link
+    index -= 1
+  end
+
   while 1 < index
+    node.link = Node.new(nil, nil)
     node = node.link
     index -= 1
   end
@@ -105,3 +111,17 @@ def add_item(list, index, data)
 
   list
 end
+
+
+def select_even(list)
+  new_list = LinkedList.new
+  node = list.head
+  while node
+    if node.data.even?
+      add_item new_list, list_size(new_list), node.data
+    end
+    node = node.link
+  end
+  new_list
+end
+
