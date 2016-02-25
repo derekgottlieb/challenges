@@ -62,6 +62,7 @@ class LinkedListTest < Minitest::Test
 
 
   def test_find_the_last_item_in_a_linked_list
+    skip
     list = LinkedList.new()
     assert_equal nil, last_item(list)
 
@@ -80,6 +81,7 @@ class LinkedListTest < Minitest::Test
 
 
   def test_find_the_smallest_item_in_a_linked_list
+    skip
     list = LinkedList.new
     assert_equal nil, smallest_item(list)
 
@@ -98,6 +100,7 @@ class LinkedListTest < Minitest::Test
 
 
   def test_find_the_largest_item_in_a_linked_list
+    skip
     list = LinkedList.new
     assert_equal nil, largest_item(list)
 
@@ -116,6 +119,7 @@ class LinkedListTest < Minitest::Test
 
 
   def test_find_the_length_of_a_linked_list
+    skip
     list = LinkedList.new
     assert_equal 0, list_size(list)
 
@@ -134,6 +138,7 @@ class LinkedListTest < Minitest::Test
 
 
   def test_get_item_at_arbitrary_position
+    skip
     list = LinkedList.new
     assert_equal nil, get_item(list, 0)
 
@@ -161,6 +166,7 @@ class LinkedListTest < Minitest::Test
 
 
   def test_shift_first_item_from_a_linked_list
+    skip
     list = LinkedList.new(Node.new("a", nil))
     assert_equal "a", shift_item(list)
     assert_equal nil, shift_item(list)
@@ -191,6 +197,7 @@ class LinkedListTest < Minitest::Test
 
 
   def test_remove_an_item_from_a_linked_list
+    skip
     list = LinkedList.new(Node.new("a", nil))
     assert_equal "a", remove_item(list, 0)
     assert_equal nil, get_item(list, 0)
@@ -220,6 +227,7 @@ class LinkedListTest < Minitest::Test
 
 
   def test_unshift_an_item_onto_a_linked_list
+    skip
     list = LinkedList.new
     assert_equal 0, list_size(list)
 
@@ -237,6 +245,7 @@ class LinkedListTest < Minitest::Test
 
 
   def test_add_an_item_to_a_linked_list
+    skip
     list = LinkedList.new
     assert_equal 0, list_size(list)
 
@@ -278,6 +287,7 @@ class LinkedListTest < Minitest::Test
   end
 
   def test_given_a_linked_list_of_strings_return_a_linked_list_of_the_strings_with_more_than_5_chars
+    skip
     # make sure it works when empty
     list     = LinkedList.new
     expected = LinkedList.new
@@ -306,6 +316,7 @@ class LinkedListTest < Minitest::Test
 
 
   def test_given_a_linked_list_of_numbers_return_a_linked_list_of_just_the_even_numbers
+    skip
     list     = LinkedList.new
     expected = LinkedList.new
     assert_equal expected, select_even(list)
@@ -325,6 +336,7 @@ class LinkedListTest < Minitest::Test
 
 
   def test_given_a_linked_list_of_strings_return_a_linked_list_of_the_strings_with_more_than_10_chars
+    skip
     # make sure it works when empty
     list     = LinkedList.new
     expected = LinkedList.new
