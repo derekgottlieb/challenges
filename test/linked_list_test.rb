@@ -3,14 +3,14 @@ require 'your_code_goes_here'
 # I'm putting these at the toplevel to make it easier for you,
 # but it's best to avoid this as it pollutes Object's constants.
 class LinkedList
-  attr_reader :head
+  attr_accessor :head
   def initialize(head=nil)
     @head = head
   end
 end
 
 class Node
-  attr_reader :data, :link
+  attr_accessor :data, :link
   def initialize(data, link)
     @data, @link = data, link
   end
@@ -18,7 +18,7 @@ end
 
 
 class Medusa
-  attr_reader :name, :statues
+  attr_accessor :name, :statues
   def initialize(name, statues)
     @name, @statues = name, statues
   end
@@ -26,7 +26,7 @@ end
 
 
 class Person
-  attr_reader :name
+  attr_accessor :name
   def initialize(name)
     @name = name
   end
@@ -124,7 +124,67 @@ class LinkedListTest < Minitest::Test
     assert_equal 3, list_size(list)
   end
 
-  # Remove an item from a linked list
+
+  def test_get_item_at_arbitrary_pisition
+    list = LinkedList.new
+    assert_equal nil, get_item(list, 0)
+
+    list = LinkedList.new(Node.new("a", nil))
+    assert_equal 'a', get_item(list, 0)
+    assert_equal nil, get_item(list, 1)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+    assert_equal 'a', get_item(list, 0)
+    assert_equal 'b', get_item(list, 1)
+    assert_equal nil, get_item(list, 2)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
+    assert_equal 'a', get_item(list, 0)
+    assert_equal 'b', get_item(list, 1)
+    assert_equal 'c', get_item(list, 2)
+    assert_equal nil, get_item(list, 3)
+
+    list = LinkedList.new(Node.new("c", Node.new("b", Node.new("a", nil))))
+    assert_equal 'c', get_item(list, 0)
+    assert_equal 'b', get_item(list, 1)
+    assert_equal 'a', get_item(list, 2)
+    assert_equal nil, get_item(list, 3)
+  end
+
+
+  def test_shift_first_item_from_a_linked_list
+    list = LinkedList.new(Node.new("a", nil))
+    assert_equal "a", shift_item(list)
+    assert_equal nil, shift_item(list)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+    assert_equal 'a', shift_item(list)
+    assert_equal 'b', get_item(list, 0)
+    assert_equal nil, get_item(list, 1)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+    assert_equal 'a', shift_item(list)
+    assert_equal 'b', get_item(list, 0)
+    assert_equal nil, get_item(list, 1)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
+    assert_equal 'a', shift_item(list)
+    assert_equal 'b', get_item(list, 0)
+    assert_equal 'c', get_item(list, 1)
+    assert_equal nil, get_item(list, 2)
+    assert_equal 'b', shift_item(list)
+    assert_equal 'c', get_item(list, 0)
+    assert_equal nil, get_item(list, 1)
+    assert_equal 'c', shift_item(list)
+    assert_equal nil, get_item(list, 0)
+    assert_equal nil, shift_item(list)
+    assert_equal nil, get_item(list, 0)
+  end
+
+  def test_remove_an_item_from_a_linked_list
+    skip
+  end
+
   # Add an item to a linked list
   # Given a linked list of numbers, return a linked list of just the even numbers
   # Given a linked list of numbers, return a linked list of just the odd numbers

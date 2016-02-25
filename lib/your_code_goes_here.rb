@@ -41,3 +41,22 @@ def list_size(list)
   end
   size
 end
+
+
+def get_item(list, index)
+  return nil unless list.head
+  node = list.head
+  while node && index > 0
+    node = node.link
+    index -= 1
+  end
+  node && node.data
+end
+
+
+def shift_item(list)
+  return nil unless list.head
+  data = list.head.data
+  list.head = list.head.link
+  data
+end
