@@ -277,13 +277,42 @@ class LinkedListTest < Minitest::Test
     assert_equal 6, list_size(list)
   end
 
+  def test_given_a_linked_list_of_strings_return_a_linked_list_of_the_strings_with_more_than_5_chars
+    # make sure it works when empty
+    list     = LinkedList.new
+    expected = LinkedList.new
+    assert_equal expected, select_more_than_five_chars(list)
+
+    # five is not selected
+    list     = LinkedList.new(Node.new('abcde', nil))
+    expected = LinkedList.new
+    assert_equal expected, select_more_than_five_chars(list)
+
+    # six is selected
+    list     = LinkedList.new(Node.new('abcdef', nil))
+    expected = LinkedList.new(Node.new('abcdef', nil))
+    assert_equal expected, select_more_than_five_chars(list)
+
+    # seven is selected
+    list     = LinkedList.new(Node.new('abcdefg', nil))
+    expected = LinkedList.new(Node.new('abcdefg', nil))
+    assert_equal expected, select_more_than_five_chars(list)
+
+    # multiple examples from a list
+    list     = LinkedList.new(Node.new('', Node.new('123456', Node.new('abcdefghi', Node.new('lll', nil)))))
+    expected = LinkedList.new(Node.new('123456', Node.new('abcdefghi', nil)))
+    assert_equal expected, select_more_than_five_chars(list)
+  end
+
 
   def test_given_a_linked_list_of_numbers_return_a_linked_list_of_just_the_even_numbers
-    list = LinkedList.new
-    assert_equal LinkedList.new, select_even(list)
+    list     = LinkedList.new
+    expected = LinkedList.new
+    assert_equal expected, select_even(list)
 
-    list = LinkedList.new(Node.new(1, nil))
-    assert_equal LinkedList.new, select_even(list)
+    list     = LinkedList.new(Node.new(1, nil))
+    expected = LinkedList.new
+    assert_equal expected, select_even(list)
 
     list     = LinkedList.new(Node.new(1, Node.new(2, nil)))
     expected = LinkedList.new(Node.new(2, nil))
@@ -294,10 +323,46 @@ class LinkedListTest < Minitest::Test
     assert_equal expected, select_even(list)
   end
 
+
+  def test_given_a_linked_list_of_strings_return_a_linked_list_of_the_strings_with_more_than_10_chars
+    # make sure it works when empty
+    list     = LinkedList.new
+    expected = LinkedList.new
+    assert_equal expected, select_more_than_ten_chars(list)
+
+    # ten is not selected
+    list     = LinkedList.new(Node.new('abcdefghij', nil))
+    expected = LinkedList.new
+    assert_equal expected, select_more_than_ten_chars(list)
+
+    # eleven is selected
+    list     = LinkedList.new(Node.new('abcdefghijk', nil))
+    expected = LinkedList.new(Node.new('abcdefghijk', nil))
+    assert_equal expected, select_more_than_ten_chars(list)
+
+    # twelve is selected
+    list     = LinkedList.new(Node.new('abcdefghijkl', nil))
+    expected = LinkedList.new(Node.new('abcdefghijkl', nil))
+    assert_equal expected, select_more_than_ten_chars(list)
+
+    # multiple examples from a list
+    list     = LinkedList.new(
+                 Node.new('oooiiiuuukkk',
+                 Node.new('123456',
+                 Node.new('aaaaaaaaaaaaaaaaaa',
+                 Node.new('0000000000000000000',
+                 nil)))))
+    expected = LinkedList.new(
+                 Node.new('oooiiiuuukkk',
+                 Node.new('aaaaaaaaaaaaaaaaaa',
+                 Node.new('0000000000000000000',
+                 nil))))
+    assert_equal expected, select_more_than_ten_chars(list)
+  end
+
+
   # Given a linked list of numbers, return a linked list of just the odd numbers
   # Given a linked list of numbers, return a linked list of just the numbers that pass a block I give you
-  # Given a linked list of strings, return a linked list of the strings with more than 5 chars
-  # Given a linked list of strings, return a linked list of the strings with more than 10 chars
   # Given a linked list of ints, return a linked list of the integers that are divisible by 3
   # Given a linked list of strings, return the count of how many end in an "s"
   # Given a linked list of strings, return a linked list of the ones that look like phone numbers (three digits, a dash, four digits)

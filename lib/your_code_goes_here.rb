@@ -113,6 +113,32 @@ def add_item(list, index, data)
 end
 
 
+def select_more_than_five_chars(list)
+  new_list = LinkedList.new
+  node = list.head
+  while node
+    if node.data.length > 5
+      add_item new_list, list_size(new_list), node.data
+    end
+    node = node.link
+  end
+  new_list
+end
+
+def select_more_than_ten_chars(list)
+  new_list = LinkedList.new
+  node = list.head
+  while node
+    if node.data.length > 10
+      add_item new_list, list_size(new_list), node.data
+    end
+    node = node.link
+  end
+  new_list
+end
+
+
+
 def select_even(list)
   new_list = LinkedList.new
   node = list.head
