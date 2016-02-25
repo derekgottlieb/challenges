@@ -125,7 +125,7 @@ class LinkedListTest < Minitest::Test
   end
 
 
-  def test_get_item_at_arbitrary_pisition
+  def test_get_item_at_arbitrary_position
     list = LinkedList.new
     assert_equal nil, get_item(list, 0)
 
@@ -210,7 +210,55 @@ class LinkedListTest < Minitest::Test
     assert_equal nil, get_item(list, 1)
   end
 
-  # Add an item to a linked list
+
+  def test_unshift_an_item_onto_a_linked_list
+    list = LinkedList.new
+    assert_equal 0, list_size(list)
+
+    assert_equal list, unshift_list(list, "b")
+    assert_equal 'b', get_item(list, 0)
+    assert_equal nil, get_item(list, 1)
+    assert_equal 1, list_size(list)
+
+    assert_equal list, unshift_list(list, "a")
+    assert_equal 'a', get_item(list, 0)
+    assert_equal 'b', get_item(list, 1)
+    assert_equal nil, get_item(list, 2)
+    assert_equal 2, list_size(list)
+  end
+
+
+  def test_add_an_item_to_a_linked_list
+    list = LinkedList.new
+    assert_equal 0, list_size(list)
+
+    assert_equal list, add_item(list, 0, "b")
+    assert_equal 'b', get_item(list, 0)
+    assert_equal nil, get_item(list, 1)
+    assert_equal 1, list_size(list)
+
+    assert_equal list, add_item(list, 0, "a")
+    assert_equal 'a', get_item(list, 0)
+    assert_equal 'b', get_item(list, 1)
+    assert_equal nil, get_item(list, 2)
+    assert_equal 2, list_size(list)
+
+    assert_equal list, add_item(list, 1, "c")
+    assert_equal 'a', get_item(list, 0)
+    assert_equal 'c', get_item(list, 1)
+    assert_equal 'b', get_item(list, 2)
+    assert_equal nil, get_item(list, 3)
+    assert_equal 3, list_size(list)
+
+    assert_equal list, add_item(list, 3, "d")
+    assert_equal 'a', get_item(list, 0)
+    assert_equal 'c', get_item(list, 1)
+    assert_equal 'b', get_item(list, 2)
+    assert_equal 'd', get_item(list, 3)
+    assert_equal nil, get_item(list, 4)
+    assert_equal 4, list_size(list)
+  end
+
   # Given a linked list of numbers, return a linked list of just the even numbers
   # Given a linked list of numbers, return a linked list of just the odd numbers
   # Given a linked list of numbers, return a linked list of just the numbers that pass a block I give you

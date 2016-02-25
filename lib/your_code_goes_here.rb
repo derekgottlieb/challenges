@@ -81,3 +81,27 @@ def remove_item(list, index)
   node.link = node.link.link if node && node.link
   to_remove && to_remove.data
 end
+
+
+def unshift_list(list, data)
+  list.head = Node.new(data, list.head)
+  list
+end
+
+
+def add_item(list, index, data)
+  if index == 0
+    list.head = Node.new(data, list.head)
+    return list
+  end
+
+  node = list.head
+  while 1 < index
+    node = node.link
+    index -= 1
+  end
+
+  node.link = Node.new(data, node.link)
+
+  list
+end
