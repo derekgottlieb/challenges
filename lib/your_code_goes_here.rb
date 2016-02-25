@@ -60,3 +60,24 @@ def shift_item(list)
   list.head = list.head.link
   data
 end
+
+
+def remove_item(list, index)
+  return nil unless list.head
+
+  if list.head && index == 0
+    data = list.head.data
+    list.head = list.head.link
+    return data
+  end
+
+  node = list.head
+  while node.link && index > 1
+    node = node.link
+    index -= 1
+  end
+
+  to_remove = node.link
+  node.link = node.link.link if node && node.link
+  to_remove && to_remove.data
+end
