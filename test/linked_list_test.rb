@@ -70,8 +70,40 @@ class LinkedListTest < Minitest::Test
     assert_equal "c", last_item(list)
   end
 
+
+  def test_find_the_smallest_item_in_a_linked_list
+    list = LinkedList.new
+    assert_equal nil, smallest_item(list)
+
+    list = LinkedList.new(Node.new("a", nil))
+    assert_equal "a", smallest_item(list)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+    assert_equal "a", smallest_item(list)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
+    assert_equal "a", smallest_item(list)
+
+    list = LinkedList.new(Node.new("c", Node.new("b", Node.new("a", nil))))
+    assert_equal "a", smallest_item(list)
+  end
+
+
   def test_find_the_largest_item_in_a_linked_list
-    # (of size 0, 1, 2, 3)
+    list = LinkedList.new
+    assert_equal nil, largest_item(list)
+
+    list = LinkedList.new(Node.new("a", nil))
+    assert_equal "a", largest_item(list)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+    assert_equal "b", largest_item(list)
+
+    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
+    assert_equal "c", largest_item(list)
+
+    list = LinkedList.new(Node.new("c", Node.new("b", Node.new("a", nil))))
+    assert_equal "c", largest_item(list)
   end
 
   # Find the smallest item in a linked list (of size 0, 1, 2, 3)
