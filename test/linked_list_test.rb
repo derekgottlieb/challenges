@@ -1,4 +1,4 @@
-require 'your_code_goes_here'
+require 'linked_list_functions'
 
 # I'm putting these at the toplevel to make it easier for you,
 # but it's best to avoid this as it pollutes Object's constants.
@@ -23,23 +23,6 @@ class Node
     other.kind_of?(Node) && self.data == other.data && self.link == other.link
   end
 end
-
-
-class Medusa
-  attr_accessor :name, :statues
-  def initialize(name, statues)
-    @name, @statues = name, statues
-  end
-end
-
-
-class Person
-  attr_accessor :name
-  def initialize(name)
-    @name = name
-  end
-end
-
 
 
 class LinkedListTest < Minitest::Test
