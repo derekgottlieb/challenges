@@ -1,3 +1,7 @@
+# A function is a method that doesn't use any instance variables
+# So it only works with its arguments, as local variables
+
+
 # These ones are good to start with:
 def list_first(list)
 end
