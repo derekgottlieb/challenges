@@ -1,3 +1,5 @@
+require 'linked_list_functions/challenges'
+
 RSpec.describe 'linked list functions' do
   describe 'list_first' do
     it 'returns nil for an empty list' do
