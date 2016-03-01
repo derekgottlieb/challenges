@@ -25,250 +25,385 @@ class Node
 end
 
 
-class LinkedListTest < Minitest::Test
-  def test_find_the_first_item_in_a_linked_list
-    list = LinkedList.new()
-    assert_equal nil, first_item(list)
+RSpec.describe 'linked list functions -- (a function is a method that just works on its arguments and not on ivars)' do
+  def assert_equal(expected, actual)
+    expect(expected).to eq actual
+  end
 
-    list = LinkedList.new
-    assert_equal nil, first_item(list)
+  describe 'first_item' do
+    it 'returns nil for an empty list' do
+      list = LinkedList.new()
+      assert_equal nil, first_item(list)
+    end
 
-    list = LinkedList.new(Node.new("a", nil))
-    assert_equal "a", first_item(list)
+    it 'returns the data of the first item, when there is one item' do
+      list = LinkedList.new(Node.new("a", nil))
+      assert_equal "a", first_item(list)
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-    assert_equal "a", first_item(list)
 
-    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
-    assert_equal "a", first_item(list)
+    it 'returns the data of the first item, when there is more than one item' do
+      list = LinkedList.new(Node.new(:lol, Node.new(:wtf, Node.new(:bbq, nil))))
+      assert_equal :lol, first_item(list)
+    end
   end
 
 
-  def test_find_the_last_item_in_a_linked_list
-    skip
-    list = LinkedList.new()
-    assert_equal nil, last_item(list)
 
-    list = LinkedList.new
-    assert_equal nil, last_item(list)
+  describe 'unshift' do
+    it 'inserts an item at the head of the list' do
+      list = LinkedList.new
 
-    list = LinkedList.new(Node.new("a", nil))
-    assert_equal "a", last_item(list)
+      unshift_list(list, "b")
+      expected = LinkedList.new(Node.new("b", nil))
+      assert_equal expected, list
 
-    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-    assert_equal "b", last_item(list)
+      unshift_list(list, 1)
+      expected = LinkedList.new(Node.new(1, Node.new("b", nil)))
+      assert_equal expected, list
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
-    assert_equal "c", last_item(list)
+    it 'returns the list itself' do
+      list = LinkedList.new
+      assert_equal list, unshift_list(list, "b")
+    end
   end
 
 
-  def test_find_the_smallest_item_in_a_linked_list
-    skip
-    list = LinkedList.new
-    assert_equal nil, smallest_item(list)
+  describe 'shift_item' do
+    it 'returns nil when the list is empty' do
+      list = LinkedList.new
+      assert_equal nil, shift_item(list)
+      assert_equal LinkedList.new, list
+    end
 
-    list = LinkedList.new(Node.new("a", nil))
-    assert_equal "a", smallest_item(list)
+    it 'returns the first item when there is an element in the list' do
+      list = LinkedList.new(Node.new("a", nil))
+      assert_equal "a", shift_item(list)
+      assert_equal LinkedList.new, list
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-    assert_equal "a", smallest_item(list)
+    it 'removes the first item from the list' do
+      list = LinkedList.new(Node.new("a", nil))
+      assert_equal "a", shift_item(list)
+      assert_equal nil, shift_item(list)
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
-    assert_equal "a", smallest_item(list)
-
-    list = LinkedList.new(Node.new("c", Node.new("b", Node.new("a", nil))))
-    assert_equal "a", smallest_item(list)
+    example 'a bigger example' do
+      list = LinkedList.new(Node.new(:abc, Node.new(:def, Node.new(:ghi, nil))))
+      assert_equal :abc, shift_item(list)
+      assert_equal LinkedList.new(Node.new(:def, Node.new(:ghi, nil))), list
+      assert_equal :def, shift_item(list)
+      assert_equal LinkedList.new(Node.new(:ghi, nil)), list
+      assert_equal :ghi, shift_item(list)
+      assert_equal LinkedList.new, list
+      assert_equal nil,  shift_item(list)
+    end
   end
 
 
-  def test_find_the_largest_item_in_a_linked_list
-    skip
-    list = LinkedList.new
-    assert_equal nil, largest_item(list)
 
-    list = LinkedList.new(Node.new("a", nil))
-    assert_equal "a", largest_item(list)
 
-    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-    assert_equal "b", largest_item(list)
+  describe 'list_size' do
+    it 'is 0 for an empty list' do
+      list = LinkedList.new
+      assert_equal 0, list_size(list)
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
-    assert_equal "c", largest_item(list)
+    it 'is 1 for a list with one item' do
+      list = LinkedList.new(Node.new("a", nil))
+      assert_equal 1, list_size(list)
+    end
 
-    list = LinkedList.new(Node.new("c", Node.new("b", Node.new("a", nil))))
-    assert_equal "c", largest_item(list)
+    it 'is 2 for a list with two items' do
+      list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+      assert_equal 2, list_size(list)
+    end
+
+    it 'is 3 for a list with three items' do
+      list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
+      assert_equal 3, list_size(list)
+    end
+
+    it 'does not care what is in the list' do
+      list = LinkedList.new(Node.new("c", Node.new("b", Node.new("a", nil))))
+      assert_equal 3, list_size(list)
+    end
   end
 
 
-  def test_find_the_length_of_a_linked_list
-    skip
-    list = LinkedList.new
-    assert_equal 0, list_size(list)
 
-    list = LinkedList.new(Node.new("a", nil))
-    assert_equal 1, list_size(list)
+  describe 'last_item' do
+    it 'returns nil for an empty list' do
+      list = LinkedList.new()
+      assert_equal nil, last_item(list)
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-    assert_equal 2, list_size(list)
+    it 'returns the first item when there is only one' do
+      list = LinkedList.new(Node.new("a", nil))
+      assert_equal "a", last_item(list)
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
-    assert_equal 3, list_size(list)
-
-    list = LinkedList.new(Node.new("c", Node.new("b", Node.new("a", nil))))
-    assert_equal 3, list_size(list)
+    it 'returns the last item when there is more than one' do
+      list = LinkedList.new(Node.new(:lol, Node.new(:wtf, Node.new(:bbq, nil))))
+      assert_equal :bbq, last_item(list)
+    end
   end
 
 
-  def test_get_item_at_arbitrary_position
-    skip
-    list = LinkedList.new
-    assert_equal nil, get_item(list, 0)
 
-    list = LinkedList.new(Node.new("a", nil))
-    assert_equal 'a', get_item(list, 0)
-    assert_equal nil, get_item(list, 1)
+  describe 'smallest_item' do
+    it 'returns nil for the empty list' do
+      list = LinkedList.new
+      assert_equal nil, smallest_item(list)
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-    assert_equal 'a', get_item(list, 0)
-    assert_equal 'b', get_item(list, 1)
-    assert_equal nil, get_item(list, 2)
+    it 'returns the first item when there is only one' do
+      list = LinkedList.new(Node.new("a", nil))
+      assert_equal "a", smallest_item(list)
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
-    assert_equal 'a', get_item(list, 0)
-    assert_equal 'b', get_item(list, 1)
-    assert_equal 'c', get_item(list, 2)
-    assert_equal nil, get_item(list, 3)
+    describe 'returns the item that is less than the others, when there is more than one' do
+      example '("a" -> "b" -> "c") returns "a"' do
+        list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
+        assert_equal "a", smallest_item(list)
+      end
 
-    list = LinkedList.new(Node.new("c", Node.new("b", Node.new("a", nil))))
-    assert_equal 'c', get_item(list, 0)
-    assert_equal 'b', get_item(list, 1)
-    assert_equal 'a', get_item(list, 2)
-    assert_equal nil, get_item(list, 3)
+      example '("a" -> "c" -> "b") returns "a"' do
+        list = LinkedList.new Node.new("a", Node.new("c", Node.new("b", nil)))
+        assert_equal "a", smallest_item(list)
+      end
+
+      example '("b" -> "a" -> "c") returns "a"' do
+        list = LinkedList.new Node.new("b", Node.new("a", Node.new("c", nil)))
+        assert_equal "a", smallest_item(list)
+      end
+
+      example '("b" -> "c" -> "a") returns "a"' do
+        list = LinkedList.new Node.new("b", Node.new("c", Node.new("a", nil)))
+        assert_equal "a", smallest_item(list)
+      end
+
+      example '("c" -> "b" -> "a") returns "a"' do
+        list = LinkedList.new Node.new("c", Node.new("b", Node.new("a", nil)))
+        assert_equal "a", smallest_item(list)
+      end
+
+      example '("c" -> "a" -> "b") returns "a"' do
+        list = LinkedList.new Node.new("c", Node.new("a", Node.new("b", nil)))
+        assert_equal "a", smallest_item(list)
+      end
+
+      example '(100 -> 45 -> 300)  returns 45' do
+        list = LinkedList.new Node.new(100, Node.new(45, Node.new(300, nil)))
+        assert_equal 45, smallest_item(list)
+      end
+    end
   end
 
 
-  def test_shift_first_item_from_a_linked_list
-    skip
-    list = LinkedList.new(Node.new("a", nil))
-    assert_equal "a", shift_item(list)
-    assert_equal nil, shift_item(list)
 
-    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-    assert_equal 'a', shift_item(list)
-    assert_equal 'b', get_item(list, 0)
-    assert_equal nil, get_item(list, 1)
+  describe 'largest_item' do
+    it 'returns nil for the empty list' do
+      list = LinkedList.new
+      assert_equal nil, largest_item(list)
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-    assert_equal 'a', shift_item(list)
-    assert_equal 'b', get_item(list, 0)
-    assert_equal nil, get_item(list, 1)
+    it 'returns the first item when there is only one' do
+      list = LinkedList.new(Node.new("a", nil))
+      assert_equal "a", largest_item(list)
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
-    assert_equal 'a', shift_item(list)
-    assert_equal 'b', get_item(list, 0)
-    assert_equal 'c', get_item(list, 1)
-    assert_equal nil, get_item(list, 2)
-    assert_equal 'b', shift_item(list)
-    assert_equal 'c', get_item(list, 0)
-    assert_equal nil, get_item(list, 1)
-    assert_equal 'c', shift_item(list)
-    assert_equal nil, get_item(list, 0)
-    assert_equal nil, shift_item(list)
-    assert_equal nil, get_item(list, 0)
+    describe 'returns the item that is less than the others, when there is more than one' do
+      example '("a" -> "b" -> "c") returns "c"' do
+        list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
+        assert_equal "c", largest_item(list)
+      end
+
+      example '("a" -> "c" -> "b") returns "c"' do
+        list = LinkedList.new Node.new("a", Node.new("c", Node.new("b", nil)))
+        assert_equal "c", largest_item(list)
+      end
+
+      example '("b" -> "a" -> "c") returns "c"' do
+        list = LinkedList.new Node.new("b", Node.new("a", Node.new("c", nil)))
+        assert_equal "c", largest_item(list)
+      end
+
+      example '("b" -> "c" -> "a") returns "c"' do
+        list = LinkedList.new Node.new("b", Node.new("c", Node.new("a", nil)))
+        assert_equal "c", largest_item(list)
+      end
+
+      example '("c" -> "b" -> "a") returns "c"' do
+        list = LinkedList.new Node.new("c", Node.new("b", Node.new("a", nil)))
+        assert_equal "c", largest_item(list)
+      end
+
+      example '("c" -> "a" -> "b") returns "c"' do
+        list = LinkedList.new Node.new("c", Node.new("a", Node.new("b", nil)))
+        assert_equal "c", largest_item(list)
+      end
+
+      example '(100 -> 45 -> 300)  returns 300' do
+        list = LinkedList.new Node.new(100, Node.new(45, Node.new(300, nil)))
+        assert_equal 300, largest_item(list)
+      end
+    end
   end
 
 
-  def test_remove_an_item_from_a_linked_list
-    skip
-    list = LinkedList.new(Node.new("a", nil))
-    assert_equal "a", remove_item(list, 0)
-    assert_equal nil, get_item(list, 0)
 
-    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-    assert_equal 'a', remove_item(list, 0)
-    assert_equal 'b', get_item(list, 0)
-    assert_equal nil, get_item(list, 1)
+  describe 'get_item' do
+    it 'returns nil when asked for an item in an empty list' do
+      list = LinkedList.new
+      assert_equal nil, get_item(list, 0)
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-    assert_equal 'b', remove_item(list, 1)
-    assert_equal 'a', get_item(list, 0)
-    assert_equal nil, get_item(list, 1)
+    it 'returns nil when asked for an item well into an empty list' do
+      list = LinkedList.new
+      assert_equal nil, get_item(list, 5)
+    end
 
-    list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
-    assert_equal 'b', remove_item(list, 1)
-    assert_equal 'a', get_item(list, 0)
-    assert_equal 'c', get_item(list, 1)
-    assert_equal nil, get_item(list, 2)
-    assert_equal 'c', remove_item(list, 1)
-    assert_equal 'a', get_item(list, 0)
-    assert_equal nil, get_item(list, 1)
-    assert_equal 'a', remove_item(list, 0)
-    assert_equal nil, get_item(list, 0)
-    assert_equal nil, get_item(list, 1)
+    it 'returns nil when asked for an item past the end of a list with items in it' do
+      list = LinkedList.new(Node.new("a", nil))
+      assert_equal nil, get_item(list, 1)
+    end
+
+    it 'returns nil when asked for an item well past the end of a list with items in it' do
+      list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+      assert_equal nil, get_item(list, 100)
+    end
+
+    it 'finds the first item when asked for index 0' do
+      list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+      assert_equal 'a', get_item(list, 0)
+    end
+
+    it 'finds the first item when asked for index 1' do
+      list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+      assert_equal 'b', get_item(list, 1)
+    end
+
+    it 'finds each item in a long list' do
+      list = LinkedList.new(Node.new("c", Node.new("b", Node.new("a", nil))))
+      assert_equal 'c', get_item(list, 0)
+      assert_equal 'b', get_item(list, 1)
+      assert_equal 'a', get_item(list, 2)
+      assert_equal nil, get_item(list, 3)
+    end
   end
 
 
-  def test_unshift_an_item_onto_a_linked_list
-    skip
-    list = LinkedList.new
-    assert_equal 0, list_size(list)
 
-    assert_equal list, unshift_list(list, "b")
-    assert_equal 'b', get_item(list, 0)
-    assert_equal nil, get_item(list, 1)
-    assert_equal 1, list_size(list)
+  describe 'add_item' do
+    context 'when told to insert at position 0' do
+      it 'adds a new node at the head' do
+        list = LinkedList.new
+        add_item(list, 0, "b")
+        assert_equal Node, list.head.class
+      end
+      it 'sets that node\'s data to the inserted data' do
+        list = LinkedList.new
+        add_item(list, 0, "b")
+        assert_equal "b", list.head.data
+      end
+      it 'sets the old head as that node\'s link' do
+        list = LinkedList.new
+        add_item(list, 0, "b")
+        assert_equal nil, list.head.link
 
-    assert_equal list, unshift_list(list, "a")
-    assert_equal 'a', get_item(list, 0)
-    assert_equal 'b', get_item(list, 1)
-    assert_equal nil, get_item(list, 2)
-    assert_equal 2, list_size(list)
+        list = LinkedList.new(Node.new("c", nil))
+        add_item(list, 0, "b")
+        assert_equal "c", list.head.link.data
+      end
+      it 'returns the list' do
+        list = LinkedList.new(Node.new("c", nil))
+        assert_equal list, add_item(list, 0, "b")
+      end
+    end
+
+    context 'when told to insert at a position other than 0, and there is a node there' do
+      it 'adds a new node at the specified index' do
+        list = LinkedList.new(Node.new("x", Node.new("y", Node.new("z", nil))))
+        add_item(list, 2, "O.o")
+        assert_equal Node, list.head.link.link.class
+      end
+      it 'sets that node\'s data to the inserted data' do
+        list = LinkedList.new(Node.new("x", Node.new("y", Node.new("z", nil))))
+        add_item(list, 2, "O.o")
+        assert_equal "O.o", list.head.link.link.data
+      end
+      it 'sets the node that used to be at that position as that node\'s link' do
+        list = LinkedList.new(Node.new("x", Node.new("y", Node.new("z", nil))))
+        add_item(list, 2, "O.o")
+        assert_equal "z", list.head.link.link.link.data
+      end
+      it 'doesn\'t change the intermediate nodes' do
+        list = LinkedList.new(Node.new("x", Node.new("y", Node.new("z", nil))))
+        add_item(list, 2, "O.o")
+        assert_equal "x", list.head.data
+        assert_equal "y", list.head.link.data
+      end
+      it 'returns the list' do
+        list = LinkedList.new(Node.new("x", Node.new("y", Node.new("z", nil))))
+        assert_equal list, add_item(list, 2, "O.o")
+      end
+    end
+
+    context 'when told to insert at a position other than 0, and there are not enough nodes there' do
+      it 'creates a head node if one does not exist' do
+        list = LinkedList.new
+        add_item(list, 2, "O.o")
+        assert_equal Node, list.head.class
+      end
+      it 'creates all the intermediate nodes up to that position' do
+        list = LinkedList.new
+        add_item(list, 2, "O.o")
+        assert_equal Node, list.head.class
+        assert_equal Node, list.head.link.class
+      end
+      it 'sets all intermediate node\'s data to nil' do
+        list = LinkedList.new
+        add_item(list, 2, "O.o")
+        assert_equal nil, list.head.data
+        assert_equal nil, list.head.link.data
+      end
+      it 'sets the last intermediate node\'s link to be the new node' do
+        list = LinkedList.new
+        add_item(list, 2, "O.o")
+        assert_equal Node, list.head.link.link.class
+      end
+      it 'sets the new node\'s data to the inserted data' do
+        list = LinkedList.new
+        add_item(list, 2, "O.o")
+        assert_equal "O.o", list.head.link.link.data
+      end
+      it 'sets the new node\'s link to be nil' do
+        list = LinkedList.new
+        add_item(list, 2, "O.o")
+        assert_equal nil, list.head.link.link.link
+      end
+      it 'adds to the end of the last node, when nodes do exist' do
+        list = LinkedList.new(Node.new("x", Node.new("y", Node.new("z", nil))))
+        add_item(list, 5, "N")
+        assert_equal "x", list.head.data
+        assert_equal "y", list.head.link.data
+        assert_equal "z", list.head.link.link.data
+        assert_equal nil, list.head.link.link.link.data
+        assert_equal nil, list.head.link.link.link.link.data
+        assert_equal "N", list.head.link.link.link.link.link.data
+        assert_equal nil, list.head.link.link.link.link.link.link
+      end
+      it 'returns the list' do
+        list = LinkedList.new
+        assert_equal list, add_item(list, 2, "O.o")
+      end
+    end
   end
+end
 
-
-  def test_add_an_item_to_a_linked_list
-    skip
-    list = LinkedList.new
-    assert_equal 0, list_size(list)
-
-    assert_equal list, add_item(list, 0, "b")
-    assert_equal 'b', get_item(list, 0)
-    assert_equal nil, get_item(list, 1)
-    assert_equal 1, list_size(list)
-
-    assert_equal list, add_item(list, 0, "a")
-    assert_equal 'a', get_item(list, 0)
-    assert_equal 'b', get_item(list, 1)
-    assert_equal nil, get_item(list, 2)
-    assert_equal 2, list_size(list)
-
-    assert_equal list, add_item(list, 1, "c")
-    assert_equal 'a', get_item(list, 0)
-    assert_equal 'c', get_item(list, 1)
-    assert_equal 'b', get_item(list, 2)
-    assert_equal nil, get_item(list, 3)
-    assert_equal 3, list_size(list)
-
-    assert_equal list, add_item(list, 3, "d")
-    assert_equal 'a', get_item(list, 0)
-    assert_equal 'c', get_item(list, 1)
-    assert_equal 'b', get_item(list, 2)
-    assert_equal 'd', get_item(list, 3)
-    assert_equal nil, get_item(list, 4)
-    assert_equal 4, list_size(list)
-
-    assert_equal list, add_item(list, 5, "e")
-    assert_equal 'a', get_item(list, 0)
-    assert_equal 'c', get_item(list, 1)
-    assert_equal 'b', get_item(list, 2)
-    assert_equal 'd', get_item(list, 3)
-    assert_equal nil, get_item(list, 4)
-    assert_equal 'e', get_item(list, 5)
-    assert_equal nil, get_item(list, 6)
-    assert_equal 6, list_size(list)
-  end
-
+__END__
   def test_given_a_linked_list_of_strings_return_a_linked_list_of_the_strings_with_more_than_5_chars
     skip
     # make sure it works when empty
@@ -387,3 +522,33 @@ class LinkedListTest < Minitest::Test
   # * Given a binding, return its self
 end
 
+
+  # describe 'remove_item' do
+  #   it 'removes the item at the first position when given 0'
+  #     list = LinkedList.new(Node.new("a", nil))
+  #     assert_equal "a", remove_item(list, 0)
+  #     assert_equal nil, get_item(list, 0)
+
+  #   it 'returns nil when there is no item to remove'
+  #     list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+  #     assert_equal 'a', remove_item(list, 0)
+  #     assert_equal 'b', get_item(list, 0)
+  #     assert_equal nil, get_item(list, 1)
+
+  #   it 'returns nil when there is no item to remove'
+  #     list = LinkedList.new(Node.new("a", Node.new("b", nil)))
+  #     assert_equal 'b', remove_item(list, 1)
+  #     assert_equal 'a', get_item(list, 0)
+  #     assert_equal nil, get_item(list, 1)
+
+  #     list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
+  #     assert_equal 'b', remove_item(list, 1)
+  #     assert_equal 'a', get_item(list, 0)
+  #     assert_equal 'c', get_item(list, 1)
+  #     assert_equal nil, get_item(list, 2)
+  #     assert_equal 'c', remove_item(list, 1)
+  #     assert_equal 'a', get_item(list, 0)
+  #     assert_equal nil, get_item(list, 1)
+  #     assert_equal 'a', remove_item(list, 0)
+  #     assert_equal nil, get_item(list, 0)
+  #     assert_equal nil, get_item(list, 1)
