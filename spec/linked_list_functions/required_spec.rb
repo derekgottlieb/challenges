@@ -1,35 +1,9 @@
+require 'spec_helper'
+require 'linked_list_functions/classes'
 require 'linked_list_functions'
-
-# I'm putting these at the toplevel to make it easier for you,
-# but it's best to avoid this as it pollutes Object's constants.
-class LinkedList
-  attr_accessor :head
-  def initialize(head=nil)
-    @head = head
-  end
-
-  def ==(other)
-    other.kind_of?(LinkedList) && self.head == other.head
-  end
-end
-
-class Node
-  attr_accessor :data, :link
-  def initialize(data, link)
-    @data, @link = data, link
-  end
-
-  def ==(other)
-    other.kind_of?(Node) && self.data == other.data && self.link == other.link
-  end
-end
 
 
 RSpec.describe 'linked list functions -- (a function is a method that just works on its arguments and not on ivars)' do
-  def assert_equal(expected, actual)
-    expect(expected).to eq actual
-  end
-
   describe 'first_item' do
     it 'returns nil for an empty list' do
       list = LinkedList.new()
