@@ -152,32 +152,32 @@ __END__
 end
 
 
-  # describe 'remove_item' do
+  # describe 'list_remove' do
   #   it 'removes the item at the first position when given 0'
   #     list = LinkedList.new(Node.new("a", nil))
-  #     assert_equal "a", remove_item(list, 0)
+  #     assert_equal "a", list_remove(list, 0)
   #     assert_equal nil, get_item(list, 0)
 
   #   it 'returns nil when there is no item to remove'
   #     list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-  #     assert_equal 'a', remove_item(list, 0)
+  #     assert_equal 'a', list_remove(list, 0)
   #     assert_equal 'b', get_item(list, 0)
   #     assert_equal nil, get_item(list, 1)
 
   #   it 'returns nil when there is no item to remove'
   #     list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-  #     assert_equal 'b', remove_item(list, 1)
+  #     assert_equal 'b', list_remove(list, 1)
   #     assert_equal 'a', get_item(list, 0)
   #     assert_equal nil, get_item(list, 1)
 
   #     list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
-  #     assert_equal 'b', remove_item(list, 1)
+  #     assert_equal 'b', list_remove(list, 1)
   #     assert_equal 'a', get_item(list, 0)
   #     assert_equal 'c', get_item(list, 1)
   #     assert_equal nil, get_item(list, 2)
-  #     assert_equal 'c', remove_item(list, 1)
+  #     assert_equal 'c', list_remove(list, 1)
   #     assert_equal 'a', get_item(list, 0)
   #     assert_equal nil, get_item(list, 1)
-  #     assert_equal 'a', remove_item(list, 0)
+  #     assert_equal 'a', list_remove(list, 0)
   #     assert_equal nil, get_item(list, 0)
   #     assert_equal nil, get_item(list, 1)

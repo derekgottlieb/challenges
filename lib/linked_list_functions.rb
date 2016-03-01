@@ -1,38 +1,37 @@
-def first_item(list)
+# These ones are good to start with:
+def list_first(list)
 end
 
-def last_item(list)
+def list_shift(list)
 end
 
-def smallest_item(list)
+def list_unshift(list, data)
+  # Try typing this into pry: show-source Node
+  require "pry"
+  binding.pry
 end
 
-def largest_item(list)
-end
 
+# Probably a nice intermediate set
 def list_size(list)
 end
 
-def get_item(list, index)
+def list_each(list, &block) # deleteme
 end
 
-def shift_item(list)
+def list_last(list)
 end
 
-def remove_item(list, index)
+def list_min(list)
 end
 
-def unshift_list(list, data)
+def list_max(list)
 end
 
-def add_item(list, index, data)
+
+# These ones are harder
+def list_at(list, index)
 end
 
-def select_more_than_five_chars(list)
-end
-
-def select_more_than_ten_chars(list)
-end
-
-def select_even(list)
+def list_insert(list, index, data)
 end

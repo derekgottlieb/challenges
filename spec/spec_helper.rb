@@ -1,6 +1,6 @@
 module SpecHelpers
   def assert_equal(expected, actual)
-    expect(expected).to eq actual
+    expect(actual).to eq expected
   end
 end
 
