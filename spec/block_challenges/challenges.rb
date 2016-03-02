@@ -1,153 +1,53 @@
 require 'spec_helper'
 require 'block_challenges'
 
-RSpec.describe 'block challenges' do
-  describe 'wrap' do
-    it 'receives a value and returns a block' do
-      assert_equal Proc, wrap(2).class
-    end
-    specify 'when you call the returned block, you get the value you passed in' do
-      assert_equal 2, wrap(2).call
-    end
+class PrimitiveArray
+  def self.[](*elements)
+    new elements
+  end
+
+  def initialize(real_array)
+    @real_array = real_array
+  end
+
+  def inspect
+    "PrimitiveArray#{@real_array.inspect}"
+  end
+
+  def [](i)
+    @real_array[i]
+  end
+
+  def length
+    @real_array.length
   end
 end
 
 
-RSpec.describe 'block challenges' do
-  specify 'call_twice calls the block two times' do
-    i = 0
-    call_twice { i += 1 }
-    assert_equal 2, i
+class ArrayWithOnlyEach
+  def self.[](*elements)
+    new elements
   end
 
-  specify 'call_thrice calls the block three times' do
-    i = 0
-    call_thrice { i += 1 }
-    assert_equal 3, i
+  def initialize(real_array)
+    @real_array = real_array
   end
-end
 
+  def inspect
+    @real_array.inspect
+  end
 
-RSpec.describe 'block challenges' do
-  describe 'yield_first' do
-    it 'when the array is empty, does nothing' do
-      times_called = 0
-      called_with = :unset
-      yield_first([]) { |char| called_with = char }
-      assert_equal :unset, called_with
-      assert_equal 0, times_called
+  def each(&block)
+    i = 0
+    while i < @real_array.length
+      block.call @real_array[i]
+      i += 1
     end
-
-    it 'when the array is not empty, it calls the block with the first item from an array' do
-      times_called = 0
-      called_with  = :unset
-      yield_first(["a", "b"]) { |char| called_with = char }
-      assert_equal 1, times_called
-      assert_equal "a", called_with
-    end
-
-    it 'doesn\'t get confused by an array with nil in it vs an empty array' do
-      times_called = 0
-      called_with = :unset
-      yield_first([nil]) { |char| called_with = char }
-      assert_equal nil, called_with
-      assert_equal 1, times_called
-    end
+    self
   end
 end
 
 __END__
-RSpec.describe 'block challenges' do
-'yield_two calls the block with both items from an array'
-called_with = []
-yield_two(["a", "b"]) { |char| called_with << char }
-assert_equal ["a", "b"], times_called
-
-'yield_three calls the block with three items from an array'
-called_with = []
-yield_three(["a", "b", "c"]) { |char| called_with << char }
-assert_equal ["a", "b", "c"], times_called
-
-'yield_four calls the block with three items from an array'
-called_with = []
-yield_four(["a", "b", "c", "d"]) { |char| called_with << char }
-assert_equal ["a", "b", "c", "d"], times_called
-
-'yield_five calls the block with three items from an array'
-called_with = []
-yield_five(["a", "b", "c", "d", "e"]) { |char| called_with << char }
-assert_equal ["a", "b", "c", "d", "e"], times_called
-
-'yield_six calls the block with six items from an array'
-called_with = []
-yield_six(["a", "b", "c", "d", "e", "f"]) { |char| called_with << char }
-assert_equal ["a", "b", "c", "d", "e", "f"], times_called
-
-'yield_seven calls the block with seven items from an array'
-called_with = []
-yield_seven(["a", "b", "c", "d", "e", "f", "g"]) { |char| called_with << char }
-assert_equal ["a", "b", "c", "d", "e", "f", "g"], times_called
-
-'yield_eight calls the block with eight items from an array'
-called_with = []
-yield_eight(["a", "b", "c", "d", "e", "f", "g", "h"]) { |char| called_with << char }
-assert_equal ["a", "b", "c", "d", "e", "f", "g", "h"], times_called
-
-'yield_nine calls the block with nine items from an array'
-called_with = []
-yield_nine(["a", "b", "c", "d", "e", "f", "g", "h", "i"]) { |char| called_with << char }
-assert_equal ["a", "b", "c", "d", "e", "f", "g", "h", "i"], times_called
-
-'yield_ten calls the block with ten items from an array'
-called_with = []
-yield_ten([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) { |char| called_with << char }
-assert_equal [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], times_called
-
-'yield_em_all calls the block with every item from an array'
-called_with = []
-yield_em_all(BracketsOnly[]) { |char| called_with << char }
-assert_equal [], times_called
-
-called_with = []
-yield_em_all(BracketsOnly["a"]) { |char| called_with << char }
-assert_equal ["a"], times_called
-
-called_with = []
-yield_em_all(BracketsOnly["a", "b"]) { |char| called_with << char }
-assert_equal ["a", "b"], times_called
-
-called_with = []
-yield_em_all(BracketsOnly["a", "b", "c"]) { |char| called_with << char }
-assert_equal ["a", "b", "c"], times_called
-
-called_with = []
-yield_em_all(BracketsOnly["a", "b", "c", "d"]) { |char| called_with << char }
-assert_equal ["a", "b", "c", "d"], times_called
-
-called_with = []
-yield_em_all(BracketsOnly["a", "b", "c", "d", "e"]) { |char| called_with << char }
-assert_equal ["a", "b", "c", "d", "e"], times_called
-
-called_with = []
-yield_em_all(BracketsOnly["a", "b", "c", "d", "e", "f"]) { |char| called_with << char }
-assert_equal ["a", "b", "c", "d", "e", "f"], times_called
-
-called_with = []
-yield_em_all(BracketsOnly["a", "b", "c", "d", "e", "f", "g"]) { |char| called_with << char }
-assert_equal ["a", "b", "c", "d", "e", "f", "g"], times_called
-
-called_with = []
-yield_em_all(BracketsOnly["a", "b", "c", "d", "e", "f", "g", "h"]) { |char| called_with << char }
-assert_equal ["a", "b", "c", "d", "e", "f", "g", "h"], times_called
-
-called_with = []
-yield_em_all(BracketsOnly["a", "b", "c", "d", "e", "f", "g", "h", "i"]) { |char| called_with << char }
-assert_equal ["a", "b", "c", "d", "e", "f", "g", "h", "i"], times_called
-
-yield_em_all(BracketsOnly[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) { |char| called_with << char }
-assert_equal [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], times_called
-
-
 'best_advice returns the first element from an array where the block returned true'
 best_advice([1,5,2]) { |n| n == 1 } # => 1
 best_advice([1,5,2]) { |n| n == 5 } # => 5
