@@ -48,12 +48,6 @@ class ArrayWithOnlyEach
 end
 
 __END__
-'best_advice returns the first element from an array where the block returned true'
-best_advice([1,5,2]) { |n| n == 1 } # => 1
-best_advice([1,5,2]) { |n| n == 5 } # => 5
-best_advice([1,5,2]) { |n| n == 2 } # => 2
-best_advice([1,5,2]) { |n| n == 8 } # => nil
-best_advice([1,5,2]) { |n| true }   # => 1
 
 
 'block_and_forth_forever receives a block, and calls it with a block that doubles whatever it receives'

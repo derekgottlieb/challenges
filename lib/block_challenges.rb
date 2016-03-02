@@ -48,3 +48,6 @@ end
 
 def yield_with_each(array, &block)
 end
+
+def best_advice(array, &block)
+end
