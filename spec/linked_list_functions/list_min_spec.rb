@@ -47,6 +47,11 @@ RSpec.describe 'linked list functions' do
         list = LinkedList.new Node.new(100, Node.new(45, Node.new(300, nil)))
         assert_equal 45, list_min(list)
       end
+
+      example 'A larger example' do
+        list = LinkedList.new Node.new(100, Node.new(45, Node.new(300, Node.new(742, Node.new(15, nil)))))
+        assert_equal 15, list_min(list)
+      end
     end
   end
 end
