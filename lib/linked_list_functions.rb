@@ -4,6 +4,9 @@
 
 # These ones are good to start with:
 def list_first(list)
+  # Try typing this into pry: show-source -e list.class
+  require "pry"
+  binding.pry
 end
 
 def list_shift(list)
