@@ -26,18 +26,7 @@ end
 def list_last(list)
 end
 
-
 def list_min(list)
-  node = list.head
-  return nil if node.nil?
-
-  min = node.data
-  while node
-    data = node.data
-    min  = data if data > min
-    node = node.link
-  end
-  min
 end
 
 
@@ -46,11 +35,6 @@ def list_at(list, index)
 end
 
 def list_insert(list, index, data)
-  list.head = node_insert(list.head, index, data)
-  list
 end
 def node_insert(node, index, data)
-  index.zero? and return Node.new(data, node)
-  node        or  return Node.new(nil, node_insert(nil, index-1, data))
-  Node.new node.data, node_insert(node.link, index-1, data)
 end
