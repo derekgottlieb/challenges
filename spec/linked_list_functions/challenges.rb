@@ -181,3 +181,5 @@ end
   #     assert_equal 'a', list_remove(list, 0)
   #     assert_equal nil, get_item(list, 0)
   #     assert_equal nil, get_item(list, 1)
+
+# insertion sort

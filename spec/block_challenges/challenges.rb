@@ -48,8 +48,6 @@ class ArrayWithOnlyEach
 end
 
 __END__
-
-
 'block_and_forth_forever receives a block, and calls it with a block that doubles whatever it receives'
 results = []
 block_and_forth_forever do |&block|
