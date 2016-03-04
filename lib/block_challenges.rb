@@ -58,6 +58,8 @@ end
 def blinked_list_unshift(link, data)
 end
 
+def block_and_forth(&block)
+end
 
 # You'll have to figure out how to define aside :)
 
