@@ -54,3 +54,11 @@ end
 
 def best_advice(array, &block)
 end
+
+
+# You'll have to figure out how to define aside :)
+
+
+class OnCount
+  # you'll have to figure out what goes in here :)
+end
