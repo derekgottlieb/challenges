@@ -55,6 +55,9 @@ end
 def best_advice(array, &block)
 end
 
+def blinked_list_unshift(link, data)
+end
+
 
 # You'll have to figure out how to define aside :)
 
