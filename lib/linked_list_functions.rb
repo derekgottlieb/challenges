@@ -5,7 +5,7 @@
 # These ones are good to start with:
 def list_first(list)
   # Try typing this into pry: show-source -e list.class
-  require "pry"
+  require 'pry'
   binding.pry
 end
 
@@ -13,17 +13,14 @@ def list_shift(list)
 end
 
 def list_unshift(list, data)
-  # Try typing this into pry: show-source Node
-  require "pry"
-  binding.pry
+ # Try typing this into pry: show-source -e list.class
+ require "pry"
+ binding.pry
 end
-
 
 # Probably a nice intermediate set
-def list_size(list)
-end
 
-def list_each(list, &block) # deleteme
+def list_size(list)
 end
 
 def list_last(list)
@@ -32,12 +29,13 @@ end
 def list_min(list)
 end
 
+def list_max(list)
+end
+
 
 # These ones are harder
 def list_at(list, index)
 end
 
 def list_insert(list, index, data)
-end
-def node_insert(node, index, data)
 end
