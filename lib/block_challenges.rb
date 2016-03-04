@@ -67,3 +67,6 @@ end
 
 class PubSub
 end
+
+class Do
+end
