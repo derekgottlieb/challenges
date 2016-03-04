@@ -64,3 +64,6 @@ end
 
 class OnCount
 end
+
+class PubSub
+end
