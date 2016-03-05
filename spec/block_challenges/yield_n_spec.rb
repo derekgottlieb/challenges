@@ -13,13 +13,13 @@ RSpec.describe 'block challenges' do
     assert_equal ["a", "b", "c"], called_with
   end
 
-  specify 'yield_four calls the block with three items from an array' do
+  specify 'yield_four calls the block with four items from an array' do
     called_with = []
     yield_four(["a", "b", "c", "d"]) { |char| called_with << char }
     assert_equal ["a", "b", "c", "d"], called_with
   end
 
-  specify 'yield_five calls the block with three items from an array' do
+  specify 'yield_five calls the block with five items from an array' do
     called_with = []
     yield_five(["a", "b", "c", "d", "e"]) { |char| called_with << char }
     assert_equal ["a", "b", "c", "d", "e"], called_with
