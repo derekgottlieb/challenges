@@ -10,14 +10,18 @@ module ClassesForIncludeSpec
       @value
     end
   end
+end
 
 
+module ClassesForIncludeSpec
   class NameOnly
     attr_reader :name, :space_ship_trips
+
     def initialize(name)
       @name = name
       @space_ship_trips = 0
     end
+
     def <=>(other)
       @space_ship_trips += 1
       name <=> other.name
@@ -44,13 +48,9 @@ RSpec.describe 'modules as "mixins"... aka using include to change inheritance' 
 
   describe 'MahMixin::Equality' do
     it 'is not available at the toplevel' do
-      raised = false
-      begin
+      assert_raises NameError do
         Equality
-      rescue NameError
-        raised = true
       end
-      assert_equal true, raised
     end
 
     it 'is available from within MahMixin' do

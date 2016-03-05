@@ -1,3 +1,6 @@
+solutions_dir = File.expand_path("../solutions", __dir__)
+$LOAD_PATH.unshift solutions_dir if Dir.exist? solutions_dir
+
 module SpecHelpers
   def assert_equal(expected, actual)
     expect(actual).to eq expected

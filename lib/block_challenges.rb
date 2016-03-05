@@ -46,9 +46,15 @@ end
 def yield_ten(array, &block)
 end
 
+# This receives a PrimitiveArray, which is a class I made that only
+# has brackets and length, so you'll have to solve it the way you
+# would in a language like C, which doesn't have real arrays
 def yield_with_while_loop(array, &block)
 end
 
+# This receives an ArrayWithOnlyEach, which, you may have guessed,
+# only has the each method. Your solution will have to work in terms
+# of each :)
 def yield_with_each(array, &block)
 end
 
@@ -78,5 +84,9 @@ end
 def block_and_forth(&block)
 end
 
+# this one is pretty similar to block_and_forth, but will require a local variable,
+# and passing of a Proc into the block spot (if you don't know how to do this,
+# go play with synseer until you see something that probably does it :)
+# http://synseer.herokuapp.com/
 def block_and_forth_forever(&block)
 end
