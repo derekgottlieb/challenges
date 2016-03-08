@@ -257,11 +257,3 @@ RSpec.describe 'list recursion' do
     end
   end
 end
-
-__END__
-General
-  count
-  fib
-  pathify (rks)
-  spiral access
-  include comparable into it

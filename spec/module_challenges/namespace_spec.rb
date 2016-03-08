@@ -1,6 +1,5 @@
 require 'module_challenges/challenges'
 
-# to add: using toplevel scope resolution operator
 RSpec.describe 'modules as namespaces' do
   specify 'define a module MahMod' do
     assert_equal Module, MahMod.class
