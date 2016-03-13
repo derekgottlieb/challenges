@@ -2,7 +2,7 @@
 # So it only works with its arguments, as local variables
 
 
-# These ones are good to start with:
+# $ mrspec spec/linked_list_functions/list_first_spec.rb
 def list_first(list)
   # Try typing this into pry: show-source -e list.class
   require 'pry'
