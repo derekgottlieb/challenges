@@ -12,6 +12,10 @@ module SpecHelpers
   def i_see_this_helpful_stuff_here(see_it)
     see_it || $devmode || raise("set to true after you've looked at it")
   end
+
+  def assert_raises(error_class, error_message=nil, &block)
+    expect(&block).to raise_error(error_class, error_message)
+  end
 end
 
 RSpec.configure do |config|
@@ -21,6 +25,7 @@ RSpec.configure do |config|
   # omit the assert_equal body from the backtrace
   config.backtrace_exclusion_patterns << /`assert_equal'/
   config.backtrace_exclusion_patterns << /`i_see_this_helpful_stuff_here'/
+  config.backtrace_exclusion_patterns << /`assert_raises'/
 
   # stop after the first failure
   config.fail_fast = true

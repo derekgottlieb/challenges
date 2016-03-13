@@ -31,16 +31,7 @@ end
 
 
 RSpec.describe 'modules as "mixins"... aka using include to change inheritance' do
-  def assert_raises(error_class, error_message=nil, &block)
-    raised = false
-    begin
-      block.call
-    rescue error_class => error
-      raised = true
-      error_message && assert_equal(error_message, error.message)
-    end
-    assert_equal true, raised
-  end
+  include SpecHelpers
 
   specify 'define a module named MahMixin' do
     assert_equal Module, MahMixin.class
