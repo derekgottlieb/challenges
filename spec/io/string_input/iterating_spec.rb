@@ -1,5 +1,4 @@
-require 'spec_helper'
-require 'string_input'
+require 'io/string_input/challenge'
 
 RSpec.describe 'StringInput' do
   include SpecHelpers
