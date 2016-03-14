@@ -1,84 +1,74 @@
-Linked List Challenges
-======================
+Challenges
+==========
 
-To ease the transition from introducing abstraction into a linked list,
-this repository has a lot of challenges that require you to work with a
-linked list that is already built.
+A place to practice, a place to grow, a place to see if you really do know.
 
-You'll write methods that do various useful things with it,
-but won't have to build them from scratch yourself.
-This should allow you to think about the algorithm without having
-to also think about the data structure, which will hopefully
-reduce the jump, and allow you to understand what the structure is,
-and why it is that way.
-
-* [Video](https://vimeo.com/156726608) explaining how to work through the challenges.
-* [Video](https://vimeo.com/156731425) of how to do the first challenge.
+These are various programming challenges centered around solidifying knowledge,
+and practicing things we may have forgotten, but still need to use.
 
 
-To solve the challenges
------------------------
+What you need
+-------------
 
-Make sure you have mrspec installed (versions aren't very important)
+I ran these all with `mrspec`. You can get it with `$ gem install mrspec rspec minitest`.
+The individual challenges will provide more information on how to run them.
 
-```
-$ gem install mrspec rspec
-Successfully installed mrspec-0.3.1
-Successfully installed rspec-3.4.0
-2 gems installed
-```
 
-Run mrspec from the root of your project, with the `--fail-fast` flag
-(this prevents the skipped tests from spamming your output),
-you should see something like this:
 
-```
-$ mrspec --fail-fast
+Suggested Order
+---------------
 
-LinkedList
-  given a linked list of strings return a linked list of the strings with more than 10 chars (PENDING: skipped)
-  find the first item in a linked list (FAILED - 1)
+* [linked list functions](spec/linked_list_functions)
+* [block challenges](spec/block_challenges)
+* [module challenges](spec/module_challenges)
+* [iterable](spec/iterable)
+* [general recursion](spec/general_recursion)
+* [list recursion](spec/list_recursion)
+* [io](spec/io)
 
-Pending: (Failures listed here are expected and do not affect your suite's status)
 
-  1) LinkedList given a linked list of strings return a linked list of the strings with more than 10 chars
-     # skipped
-     Failure/Error: skip
-       Skipped, no message given
-     # ./test/linked_list_test.rb:339:in `test_given_a_linked_list_of_strings_return_a_linked_list_of_the_strings_with_more_than_10_chars'
+Running an individual challenge
+-------------------------------
 
-Failures:
-  ======================================================================
-  1 | LinkedList find the first item in a linked list
-  ======================================================================
-  Expected: "a"
-    Actual: nil
-  test/linked_list_test.rb:54
-     49:
-     50:     list = LinkedList.new
-     51:     assert_equal nil, first_item(list)
-     52:
-     53:     list = LinkedList.new(Node.new("a", nil))
-  -> 54:     assert_equal "a", first_item(list)
-     55:
-     56:     list = LinkedList.new(Node.new("a", Node.new("b", nil)))
-     57:     assert_equal "a", first_item(list)
-     58:
-     59:     list = LinkedList.new(Node.new("a", Node.new("b", Node.new("c", nil))))
-  ======================================================================
-  test/linked_list_test.rb:54
-           54: assert_equal "a", first_item(list)
+This differs slightly between examples, based on
+whether you need to do them in order or not.
+See each set of challenges to identify how to run them.
+Once you have them all passing, though,
+you can run them with `$ mrspec` from the root of the project.
 
-Finished in 0.00244 seconds (files took 0.42488 seconds to load)
-2 examples, 1 failure, 1 pending
 
-Failed examples:
+Strategies
+----------
 
-rspec /Users/josh/deleteme/linked_list_challenges/test/linked_list_test.rb:46 # LinkedList find the first item in a linked list
-```
+* Read the readmes for each set of challenges before attempting them.
+* Read the names of the tests before trying to solve any,
+  the most useful thing for succeeding is keeping the context
+  of what you're supposed to be doing.
+* Read the error messages, take the time to analyze all the information
+  to understand what it is telling you and why it is telling you that.
+  I went to great effort to make the error messages as helpful as I could,
+* Go as far as you can, when you get stuck, try a different challenge.
+* Collaborate with others, their ideas will give you valuable insight.
+  Collaborate is not a synonym for copy, you want to share ideas,
+  not solutions.
+* First go through these methodically (slowly, deliberately, attentively),
+  then try to go through them quicker (same outcome, less time spent figuring things out).
+  You're training yourself to quickly analyze and execute.
+  There's a reason I'm fast, it's because I practice. A lot.
 
-Notice in the failure that it shows us that we expected an `"a"`, but we got a `nil`.
-This is for the example from line 54. So edit the `first_item` method in `lib/your_code_goes_here.rb`
+
+You probably can't beat these
+-----------------------------
+
+The intent is that they get increasingly difficult,
+so that each person can find their horizon of ability,
+and push it further out. This means that the challenges
+need to be harder than any student is likely to solve.
+
+So, when you hit a wall, move on to a different set of challenges.
+You can always return later, and the experience you gain in the
+interim will improve your ability to solve the ones you struggle with.
+
 
 If you get stuck
 ----------------
@@ -114,3 +104,16 @@ instance variables: @data  @link
 
 [6] pry(#<LinkedListTest>)> exit
 ```
+
+
+When Context is making it difficult to do something easy
+--------------------------------------------------------
+
+Figure out what the real question is, and answer that question in
+isolation. Then bring the answer back into the difficult context.
+Do you just need to figure out what happens when you ask a hash
+for an item that it doesn't have? Don't solve that in the middle
+of some big problem, solve it in isolation, where you can experiment
+to determine the answer in just a single line of code. Then bring
+the answer back with you and apply it to the context you're trying
+to solve.
