@@ -85,23 +85,26 @@ RSpec.describe 'StringOutput' do
 
     context 'when the read end is closed' do
       let(:output) { StringOutput.new }
-      before { output.close_read }
-      before { skip 'need to update this for print/puts/write/<</printf/putc' }
+      before { output.close_write }
 
-      specify '#gets raises IOError' do
-        assert_raises(IOError, 'not opened for reading') { output.gets }
+      specify '#print raises IOError' do
+        assert_raises(IOError, 'not opened for writing') { output.print "abc" }
       end
 
-      specify '#read raises IOError' do
-        assert_raises(IOError, 'not opened for reading') { output.read }
+      specify '#puts raises IOError' do
+        assert_raises(IOError, 'not opened for writing') { output.puts "abc" }
       end
 
-      specify '#getc raises IOError' do
-        assert_raises(IOError, 'not opened for reading') { output.getc }
+      specify '#write raises IOError' do
+        assert_raises(IOError, 'not opened for writing') { output.write 'a' }
       end
 
-      specify '#eof? raises IOError' do
-        assert_raises(IOError, 'not opened for reading') { output.eof? }
+      specify '#<< raises IOError' do
+        assert_raises(IOError, 'not opened for writing') { output << 'a' }
+      end
+
+      specify '#printf raises IOError' do
+        assert_raises(IOError, 'not opened for writing') { output.printf '%d', 1 }
       end
     end
   end
