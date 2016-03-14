@@ -1,3 +1,9 @@
+require 'spec_helper'
+# require 'string_output'
+
+RSpec.describe 'StringInput' do
+  include SpecHelpers
+end
 __END__
 writing output
   print
