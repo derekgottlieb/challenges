@@ -36,6 +36,22 @@ See each set of challenges to identify how to run them.
 Once you have them all passing, though,
 you can run them with `$ mrspec` from the root of the project.
 
+If you want to run a specific test, you can pass a hash to the
+test method, eg I'll choose "crnt: true". The key you choose will
+be considered a "tag"
+
+```ruby
+it 'does something', crnt: true do
+  assert_equal 1, 1
+end
+```
+
+Then you can tell mrspec to run the ones that are tagged like this.
+
+```ruby
+$ mrspec -t crnt
+```
+
 
 Strategies
 ----------
