@@ -1,2 +1,3 @@
-require 'ooll'
 require 'spec_helper'
+require 'ooll'
+require 'iterable'
