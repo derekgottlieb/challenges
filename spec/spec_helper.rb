@@ -4,6 +4,8 @@ if $devmode
   $LOAD_PATH.unshift File.expand_path("../solutions", __dir__)
 end
 
+require 'nokogiri'
+
 module SpecHelpers
   def assert_equal(expected, actual)
     expect(actual).to eq expected
@@ -15,6 +17,25 @@ module SpecHelpers
 
   def assert_raises(error_class, error_message=nil, &block)
     expect(&block).to raise_error(error_class, error_message)
+  end
+
+  def assert_html_equal(expected_html, actual_html)
+    my_nodes, your_nodes = [expected_html, actual_html].map { |html| html_data html }
+    assert_equal my_nodes, your_nodes
+  end
+
+  private
+
+  def html_data(html)
+    Nokogiri::HTML(html).css('*').map { |n| [n.path, html_node_data(n)] }.to_h
+  end
+
+  def html_node_data(node)
+    { name:  node.name,
+      path:  node.path,
+      attrs: node.attributes.map { |n, v| [n, v.value] }.to_h,
+      text:  node.children.select { |child| child.name == 'text' }.map(&:text).map(&:strip).join,
+    }
   end
 end
 
