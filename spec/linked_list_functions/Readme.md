@@ -62,5 +62,6 @@ These ones are harder:
 
 ```
 list_at(list, index)
+list_join(list, delimiter="")
 list_insert(list, index, data)
 ```

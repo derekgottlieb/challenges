@@ -37,5 +37,8 @@ end
 def list_at(list, index)
 end
 
+def list_join(list, delimiter="")
+end
+
 def list_insert(list, index, data)
 end
