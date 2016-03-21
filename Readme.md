@@ -10,7 +10,9 @@ and practicing things we may have forgotten, but still need to use.
 What you need
 -------------
 
-I ran these all with `mrspec`. You can get it with `$ gem install mrspec rspec minitest`.
+I ran these all with `mrspec`.
+You can get it with `$ bundle install`
+(if it gets upset that you don't have Bundler, then first `$ gem install bundler`).
 The individual challenges will provide more information on how to run them.
 
 
@@ -34,7 +36,7 @@ This differs slightly between examples, based on
 whether you need to do them in order or not.
 See each set of challenges to identify how to run them.
 Once you have them all passing, though,
-you can run them with `$ mrspec` from the root of the project.
+you can run them with `$ bundle exec mrspec` from the root of the project.
 
 If you want to run a specific test, you can pass a hash to the
 test method, eg I'll choose "crnt: true". The key you choose will
@@ -49,7 +51,7 @@ end
 Then you can tell mrspec to run the ones that are tagged like this.
 
 ```ruby
-$ mrspec -t crnt
+$ bundle exec mrspec -t crnt
 ```
 
 
