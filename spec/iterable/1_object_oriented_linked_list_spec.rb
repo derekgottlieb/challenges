@@ -37,10 +37,10 @@ RSpec.describe 'Ooll - Object Oriented Linked List' do
       assert_equal nil, list[0]
       assert_equal nil, list[1]
       assert_equal nil, list[2]
-      list << 'a'
+      list.unshift('a')
       assert_equal nil, list[1]
       assert_equal nil, list[2]
-      list << 'b'
+      list.unshift('b')
       assert_equal nil, list[2]
     end
   end
