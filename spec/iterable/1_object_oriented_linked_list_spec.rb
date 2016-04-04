@@ -37,10 +37,10 @@ RSpec.describe 'Ooll - Object Oriented Linked List' do
       assert_equal nil, list[0]
       assert_equal nil, list[1]
       assert_equal nil, list[2]
-      list << 'a'
+      list.unshift('a')
       assert_equal nil, list[1]
       assert_equal nil, list[2]
-      list << 'b'
+      list.unshift('b')
       assert_equal nil, list[2]
     end
   end
@@ -132,7 +132,7 @@ RSpec.describe 'Ooll - Object Oriented Linked List' do
       assert_equal '123', list.join
       assert_equal '123', list.join("-")
     end
-    it 'returns each of its items to_s, concatenated, when not given a delimiter' do
+    it 'returns each of its items to_s, concatenated, with given delimiter' do
       list << 'abc' << 123 << :lol
       assert_equal 'abc-123-lol',   list.join("-")
       assert_equal 'abc, 123, lol', list.join(", ")
