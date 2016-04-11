@@ -124,6 +124,22 @@ RSpec.describe 'Iterable' do
     assert_enum(Ooll[1, 2], :none?, true)  { |n| n < 0 }
   end
 
+  describe 'each_with_index' do
+    it 'returns the collection being iterated over' do
+      list = Ooll['a', 'b']
+      assert_enum(list, :each_with_index, list) { |n| }
+    end
+    it 'calls the block with each element, and index starting from 0' do
+      elements = []
+      indexes  = []
+      Ooll['a', 'b'].each_with_index do |element, index|
+        elements << element
+        indexes  << index
+      end
+      assert_equal ['a', 'b'], elements
+      assert_equal [  0,   1], indexes
+    end
+  end
 
   describe 'min_by' do
     it 'returns the smallest element, compared by the return values from the block' do

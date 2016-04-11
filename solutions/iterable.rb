@@ -86,11 +86,16 @@ module Iterable
   end
 
   def first(n=nil)
-    if n
-      take n
-    else
-      each { |e| return e }
-      nil
+    return take(n) if n
+    each { |e| return e }
+    nil
+  end
+
+  def each_with_index(&block)
+    index = 0
+    each do |element|
+      block.call element, index
+      index += 1
     end
   end
 
