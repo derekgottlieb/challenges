@@ -149,6 +149,7 @@ RSpec.describe 'Iterable' do
       assert_enum(Ooll['abc', 'z'], :min_by, 'abc') { |s| s }
       assert_enum(Ooll[nil, false], :min_by,   nil) { |bool| bool == nil ? -1 :  1  }
       assert_enum(Ooll[nil, false], :min_by, false) { |bool| bool == nil ?  1 : -1  }
+      assert_enum(Ooll[4, 2, 1, 3], :min_by,     1) { |n| n }
     end
 
     it 'returns the first seen, when there are multiple results with the same value' do
@@ -166,6 +167,7 @@ RSpec.describe 'Iterable' do
       assert_enum(Ooll['abc', 'z'], :max_by,   'z') { |s| s }
       assert_enum(Ooll[nil, false], :max_by, false) { |bool| bool == nil ? -1 :  1  }
       assert_enum(Ooll[nil, false], :max_by,   nil) { |bool| bool == nil ?  1 : -1  }
+      assert_enum(Ooll[1, 2, 4, 3], :max_by,     4) { |n| n }
     end
 
     it 'returns the first seen, when there are multiple results with the same value' do

@@ -97,19 +97,21 @@ module Iterable
       block.call element, index
       index += 1
     end
+    self
   end
 
   def min_by(&block)
     min_val = nil
     min_cmp = nil
-    i   = 0
+    i       = 0
     each do |e|
       cmp = block.call(e)
       if i == 0
         min_val = e
         min_cmp = cmp
-      else
-        min_val = e if cmp < min_cmp
+      elsif cmp < min_cmp
+        min_val = e
+        min_cmp = cmp
       end
       i += 1
     end
@@ -119,14 +121,15 @@ module Iterable
   def max_by(&block)
     max_val = nil
     max_cmp = nil
-    i   = 0
+    i       = 0
     each do |e|
       cmp = block.call(e)
       if i == 0
         max_val = e
         max_cmp = cmp
-      else
-        max_val = e if cmp > max_cmp
+      elsif cmp > max_cmp
+        max_val = e
+        max_cmp = cmp
       end
       i += 1
     end
