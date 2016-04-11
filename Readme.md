@@ -123,6 +123,11 @@ instance variables: @data  @link
 [6] pry(#<LinkedListTest>)> exit
 ```
 
+A last resort
+-------------
+
+If you get *really* stuck, and you've used the strategies (make sure you try those first)
+then you can look up the solutions I added in the solutions directory.
 
 When Context is making it difficult to do something easy
 --------------------------------------------------------
