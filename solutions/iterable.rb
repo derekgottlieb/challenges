@@ -100,38 +100,29 @@ module Iterable
     self
   end
 
-  def min_by(&block)
+  def min_by(&get_comparer)
     min_val = nil
     min_cmp = nil
-    i       = 0
-    each do |e|
-      cmp = block.call(e)
-      if i == 0
-        min_val = e
-        min_cmp = cmp
-      elsif cmp < min_cmp
-        min_val = e
+    each_with_index do |val, index|
+      cmp = get_comparer.call(val)
+      if index == 0 || cmp < min_cmp
+        min_val = val
         min_cmp = cmp
       end
-      i += 1
     end
     min_val
   end
 
-  def max_by(&block)
+  # Not enough in place at this time to remove this duplication
+  def max_by(&get_comparer)
     max_val = nil
     max_cmp = nil
-    i       = 0
-    each do |e|
-      cmp = block.call(e)
-      if i == 0
-        max_val = e
-        max_cmp = cmp
-      elsif cmp > max_cmp
-        max_val = e
+    each_with_index do |val, index|
+      cmp = get_comparer.call(val)
+      if index == 0 || cmp > max_cmp
+        max_val = val
         max_cmp = cmp
       end
-      i += 1
     end
     max_val
   end

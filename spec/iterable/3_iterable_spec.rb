@@ -144,6 +144,7 @@ RSpec.describe 'Iterable' do
   describe 'min_by' do
     it 'returns the smallest element, compared by the return values from the block' do
       assert_enum(Ooll[],           :min_by,   nil) { |s| s }
+      assert_enum(Ooll['a'],        :min_by,   'a') { |s| s }
       assert_enum(Ooll['z', 'abc'], :min_by, 'abc') { |s| s }
       assert_enum(Ooll['abc', 'z'], :min_by,   'z') { |s| s.length }
       assert_enum(Ooll['abc', 'z'], :min_by, 'abc') { |s| s }
@@ -162,6 +163,7 @@ RSpec.describe 'Iterable' do
   describe 'max_by' do
     it 'returns the largest element, compared by the return values from the block' do
       assert_enum(Ooll[],           :max_by,   nil) { |s| s }
+      assert_enum(Ooll['a'],        :max_by,   'a') { |s| s }
       assert_enum(Ooll['z', 'abc'], :max_by,   'z') { |s| s }
       assert_enum(Ooll['abc', 'z'], :max_by, 'abc') { |s| s.length }
       assert_enum(Ooll['abc', 'z'], :max_by,   'z') { |s| s }
